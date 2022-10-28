@@ -15,8 +15,8 @@ function init() {
     for (let i = 0; i < voices.length ; i++) {
       const option = document.createElement('option');
       option.setAttribute('data-name', voices[i].name);
-      // option.setAttribute('data-name', voices[i].name);
-      option.textContent = voices[i].name;
+      option.setAttribute('data-lang', voices[i].lang);
+      option.textContent = voices[i].name + " (" + voices[i].lang + ')';
       language_list.appendChild(option);
     }
   }
@@ -31,7 +31,7 @@ function init() {
       const utterThis = new SpeechSynthesisUtterance(inputTxt);
 
       const selectedOption = language_list.selectedOptions[0].getAttribute('data-name');
-
+      
       for (let i = 0; i < voices.length ; i++) {
         if (voices[i].name === selectedOption) {
           utterThis.voice = voices[i];
