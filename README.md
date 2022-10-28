@@ -4,4 +4,4 @@ Fucheng Shang
 
 Chengcheng Zhang
 
-https://github.com/MerlinZCC/introduction-to-github.git
+https://github.com/MerlinZCC/intro-to-github.git
