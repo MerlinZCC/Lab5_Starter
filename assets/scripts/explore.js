@@ -9,7 +9,7 @@ function init() {
   const synth = window.speechSynthesis;
   let voices = [];
   function populateVoiceList() {
-    // let voices = [];
+
     voices = synth.getVoices();
 
     for (let i = 0; i < voices.length ; i++) {
@@ -28,8 +28,6 @@ function init() {
 
   function talk(){
     const inputTxt = inputForm.value;
-    // onclick = (event) => {
-      // event.preventDefault();
       const utterThis = new SpeechSynthesisUtterance(inputTxt);
 
       const selectedOption = language_list.selectedOptions[0].getAttribute('data-name');
@@ -39,24 +37,20 @@ function init() {
           utterThis.voice = voices[i];
         }
       }
-      // utterThis.pitch = pitch.value;
-      // utterThis.rate = rate.value;
       let smile = document.getElementsByTagName('img');
       synth.speak(utterThis);
       let isSpeaking = synth.speaking;
-      while(isSpeaking){
+      if(isSpeaking){
         smile[0].src = "./assets/images/smiling-open.png";
-        // isSpeaking = synth.speaking;
-        console.log(isSpeaking);
-        // setTimeout(() => {smile[0].src = "./assets/images/smiling-open.png"; }, 1000);
-        // setTimeout(() => {smile[0].src = "./assets/images/smiling.png"; }, 1000);
       }
-      smile[0].src = "./assets/images/smiling.png";
+      utterThis.onend = (event) => {
+        smile[0].src = "./assets/images/smiling.png";
+      }
+      
 
       utterThis.onpause = (event) => {
         const char = event.utterance.text.charAt(event.charIndex);
         console.log(`Speech paused at character ${event.charIndex} of "${event.utterance.text}", which is "${char}".`);
-      // }
 
       inputTxt.blur();
     }
